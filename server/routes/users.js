@@ -6,7 +6,7 @@ const {deleteUserController} = require('../controllers/deleteUserController');
 
 
 router.put('/:id', updateUserController);
-router.get('/', getUserController);
+router.get('/:id', getUserController);
 router.delete('/:id', deleteUserController);
 //follow user
 //unfollow user
