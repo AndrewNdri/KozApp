@@ -8,7 +8,8 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -31,7 +32,10 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true}, ()=>{
 ;});
 
 app.use('/', indexRouter);
+//middlewares
+
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
