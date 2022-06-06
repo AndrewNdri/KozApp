@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const {userController} = require('../controllers/userController');
+const {updateUserController} = require('../controllers/updateUserController');
+const {getUserController} = require('../controllers/getUserController');
+const {deleteUserController} = require('../controllers/deleteUserController');
 
-/* GET users listing. */
-router.get('/', userController);
+
+router.put('/:id', updateUserController);
+router.get('/', getUserController);
+router.delete('/:id', deleteUserController);
+//follow user
+//unfollow user
 
 module.exports = router;
