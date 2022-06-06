@@ -1,7 +1,12 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const {registerValidation} = require('../utils/validation');
 
 module.exports.registerController = async(req, res) =>{
+    //Data validation
+    const {error} = registerValidation(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    
     //checking if the user is already in the database
     const emailExist = await User.findOne({email: req.body.email});
     if(emailExist) return res.status(400).send('Email already exists');
