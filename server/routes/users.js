@@ -4,12 +4,13 @@ const {updateUserController} = require('../controllers/updateUserController');
 const {getUserController} = require('../controllers/getUserController');
 const {deleteUserController} = require('../controllers/deleteUserController');
 const {followUserController} = require('../controllers/followUserController');
+const {unfollowUserController} = require('../controllers/unfollowUserController');
 
 
 router.put('/:id', updateUserController);
 router.get('/:id', getUserController);
 router.delete('/:id', deleteUserController);
 router.put('/:id/follow', followUserController);
-//unfollow user
+router.put('/:id/unfollow', unfollowUserController);
 
 module.exports = router;
