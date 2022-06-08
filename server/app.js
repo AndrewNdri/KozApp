@@ -27,9 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 dotenv.config();
 
 //Connect to database
-mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true}, ()=>{
+mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true})
+.then(()=>{
   console.log("Connected to database");
-;});
+})
+.catch(err => console.log(err));
 
 app.use('/', indexRouter);
 //middlewares
