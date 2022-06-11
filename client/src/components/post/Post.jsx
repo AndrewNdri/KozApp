@@ -33,9 +33,9 @@ export default function Post({post}) {
               </div>
               <div className="postBottom">
                   <div className="postBottomLeft">
-                    <img src="assets/like.png" alt="" className="likeIcon" onClick={likeHandler}/>
-                    <img src="assets/heart.png" alt="" className="likeIcon" onClick={likeHandler}/>
-                    <span className="postLikeCounter">{ like} people like it</span>
+                    <img src={`${PF}like.png`}alt="" className="likeIcon" onClick={likeHandler}/>
+                    <img src={`${PF}heart.png`} alt="" className="likeIcon" onClick={likeHandler}/>
+                    <span className="postLikeCounter">{like} people like it</span>
                   </div>
                   <div className="postBottomRight">
                       <span className="postCommentText">{post.comment} comments</span>
