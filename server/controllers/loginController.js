@@ -17,7 +17,7 @@ module.exports.loginController = async(req, res) =>{
         if(!validPassword) return res.status(400).send('Invalid password');
 
         console.log(user);
-        res.status(200).send("User logged in");
+        res.status(200).json(user);
     }catch(err){
         res.status(500).json(err);
     }
