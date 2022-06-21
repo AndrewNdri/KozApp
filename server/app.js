@@ -11,7 +11,6 @@ var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const postsRoute = require('./routes/posts');
-const {upload} = require('./utils/multer');
 
 var app = express();
 
@@ -24,7 +23,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 
@@ -35,18 +34,10 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true})
 })
 .catch(err => console.log(err));
 
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 
 app.use('/', indexRouter);
 //middlewares
-
-app.post('/api/upload', upload.single("file"), (req, res)=>{
-  try{
-    return res.status(200).json("File uploaded successfully.");
-  }catch(err){
-    console.log(err);
-  }
-});
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);

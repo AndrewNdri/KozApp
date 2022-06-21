@@ -14,13 +14,36 @@ export default function Share() {
 
     const submitHandler = async (e) =>{
         e.preventDefault();
-        const newPost = {
-            userId: user._id,
-            desc: desc.current.value
-        };
+        // const newPost = {
+        //     userId: user._id,
+        //     desc: desc.current.value
+        // };
+
+        const data = new FormData();
+        if (file){
+            const fileName = user._id + Date.now() + ".jpeg";
+            data.append('file', file);
+            data.append('userId', user._id);
+            data.append('name', fileName);
+            data.append('desc', desc.current.value);
+            //newPost.img = fileName;
+            // try{
+            //     await axios.post('/upload', data);
+            // }catch(err){
+            //     console.log(err);
+            // }
+            // console.log(data);
+        }
 
         try{
-            await axios.post("/posts", newPost);
+            await axios({
+                method: "post",
+                baseURL: `http://localhost:8000/api/posts`,
+                withCredentials: true,
+                headers: { 'Content-Type': 'multipart/form-data' },
+                data: data
+            });
+            window.location.reload();
         }catch(err){}
     }
 

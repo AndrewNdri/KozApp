@@ -3,8 +3,8 @@ const fs = require('fs');
 const {promisify} = require('util');
 const pipeline = promisify(require('stream').pipeline);
 
-module.exports.createPostController = async (req, res)=>{
-    console.log(req.body.userId);
+
+module.exports.uploadController = async (req, res)=>{
     try{
         if(req.file.detectedMimeType !== 'image/jpg' && req.file.detectedMimeType !== 'image/png' && req.file.detectedMimeType !== 'image/jpeg'){
             throw Error('Invalid file');
@@ -16,25 +16,25 @@ module.exports.createPostController = async (req, res)=>{
         return res.status(400).send(err);
     }
 
-    let fileName = req.body.name;
+    const fileName = req.body.name + ".jpg";
+
     await pipeline(
         req.file.stream, 
         fs.createWriteStream(
-            `${__dirname}/../../client/public/assets/posts/${fileName}`
+            `${__dirname}/../../client/public/assets/${fileName}`
         )
     );
 
-    const newPost = new Post({
-        userId: req.body.userId,
-        desc: req.body.desc,
-        img: req.file !== null ? `posts/${fileName}` : ""
-    });
-
-
     try{
-        const savedPost = await newPost.save();
-        res.status(201).json(savedPost);
+        await Post.findById(
+            req.body.postId,
+            {$set: {img: `${__dirname}/../../client/public/assets/${fileName}`}},
+            {new: true, upsert: true, setDefaultsOnInsert: true},
+            (err, docs) =>{
+                if(!err) return res.send(docs);
+            }
+        );
     }catch(err){
-        res.status(500).send(err);
+        return res.status(500).send({message: err});
     }
 };

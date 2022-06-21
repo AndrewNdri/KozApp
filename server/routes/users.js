@@ -7,10 +7,12 @@ const {followUserController} = require('../controllers/followUserController');
 const {unfollowUserController} = require('../controllers/unfollowUserController');
 
 
+
 router.put('/:id', updateUserController);
 router.get('/', getUserController);
 router.delete('/:id', deleteUserController);
-router.put('/:id/follow', followUserController);
-router.put('/:id/unfollow', unfollowUserController);
+router.patch('/:id/follow', followUserController);
+router.patch('/:id/unfollow', unfollowUserController);
+
 
 module.exports = router;
