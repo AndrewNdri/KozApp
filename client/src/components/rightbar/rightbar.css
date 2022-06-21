@@ -86,3 +86,22 @@
     object-fit: cover;
     border-radius: 5px;
 }
+
+.rightbarFollowButton{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border:none;
+    background-color: #5c0514;
+    color: rgb(245, 240, 228);
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-style: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.rightbarFollowButton:focus{
+    outline: none;
+}
