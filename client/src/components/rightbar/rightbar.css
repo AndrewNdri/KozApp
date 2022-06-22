@@ -95,7 +95,7 @@
     color: rgb(245, 240, 228);
     border-radius: 5px;
     padding: 5px 10px;
-    display: none;
+    display: flex;
     align-items: center;
     font-style: 16px;
     font-weight: 500;
