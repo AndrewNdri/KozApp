@@ -17,7 +17,7 @@ router.delete('/:id', deletePostController);
 router.put('/:id/like', likePostController);
 router.get('/:id', getPostController);
 router.get('/timeline/:userId', timelinePostsController);
-router.get('profile/:username', userAllPostController);
+router.get('/profile/:username', userAllPostController);
 //router.post('/upload', upload.single('file'), uploadController);
 
 module.exports = router;

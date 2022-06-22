@@ -11,13 +11,10 @@ export default function Rightbar({user}) {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
-  const {user: currentUser} = useContext(AuthContext);
-  const [followed, setFollowed] = useState(false);
+  const {user: currentUser, dispatch} = useContext(AuthContext);
+  const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id));
 
-  useEffect(()=>{
-    setFollowed(currentUser.followings.includes(user?.id))
-  },[currentUser, user.id]);
-
+  
   useEffect(() =>{
     const getFriends = async ()=>{
       try{
@@ -28,14 +25,16 @@ export default function Rightbar({user}) {
       }
     }
     getFriends();
-  }, [user._id]);
+  }, [user]);
 
   const handleClick = async ()=>{
     try{
       if(followed){
-        await axios.put("/users/"+user._id+"/follow", {userId: currentUser._id});
+        await axios.patch("/users/"+user._id+"/unfollow", {userId: currentUser._id});
+        dispatch({type: "UNFOLLOW", payload: user._id});
       }else{
-        await axios.put("/users/"+user._id+"/unfollow", {userId: currentUser._id});
+        await axios.patch("/users/"+user._id+"/follow", {userId: currentUser._id});
+        dispatch({type: "FOLLOW", payload: user._id});
       }
     }catch(err){
       console.log(err);
@@ -68,7 +67,6 @@ export default function Rightbar({user}) {
         <button className="rightbarFollowButton" onClick={handleClick}>
           {followed ? "Unfollow" : "Follow"}
           {followed ? <Remove/> : <Add/>}
-          Follow<Add />
         </button>
       )}
         <h4 className="rightbarTitle">User Information</h4>
