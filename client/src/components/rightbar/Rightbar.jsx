@@ -64,7 +64,7 @@ export default function Rightbar({user}) {
     return(
       <>
       {user.username !== currentUser.username && (
-        <button className="rightbarFollowButton" onClick={handleClick}>
+        <button className="rightbarFollowButton" onClick={handleClick} style={{display: "flex"}}>
           {followed ? "Unfollow" : "Follow"}
           {followed ? <Remove/> : <Add/>}
         </button>

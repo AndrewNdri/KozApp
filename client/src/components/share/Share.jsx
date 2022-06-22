@@ -44,7 +44,9 @@ export default function Share() {
                 data: data
             });
             window.location.reload();
-        }catch(err){}
+        }catch(err){
+            console.log(err);
+        }
     }
 
   return (
