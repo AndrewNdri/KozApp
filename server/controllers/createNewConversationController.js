@@ -1,4 +1,4 @@
-const Conversation = require("../models/Conversation");
+const Conversation = require('../models/Conversation');
 
 module.exports.createNewConversationController = async (req, res) =>{
     const newConversation = new Conversation({
@@ -7,7 +7,7 @@ module.exports.createNewConversationController = async (req, res) =>{
 
     try{
         const savedConversation = await newConversation.save();
-        res.status(200).json(savedConversation);
+        res.status(200).send(savedConversation);
     }catch(err){
         res.status(500).json(err);
     }

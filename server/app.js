@@ -44,8 +44,8 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postsRoute);
-app.use('/api/conversation', conversationsRoute);
-app.use('/api/message', messagesRoute);
+app.use('/api/conversations', conversationsRoute);
+app.use('/api/messages', messagesRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

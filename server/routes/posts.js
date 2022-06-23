@@ -14,7 +14,7 @@ const upload = multer();
 router.post('/', upload.single('file'), createPostController);
 router.put('/:id', updatePostController);
 router.delete('/:id', deletePostController);
-router.put('/:id/like', likePostController);
+router.patch('/:id/like', likePostController);
 router.get('/:id', getPostController);
 router.get('/timeline/:userId', timelinePostsController);
 router.get('/profile/:username', userAllPostController);
