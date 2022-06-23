@@ -21,9 +21,9 @@ export default function Messenger() {
                         <Message own={true}/>
                         <Message/>
                         <Message/>
+                        <Message own={true}/>
                         <Message/>
-                        <Message/>
-                        <Message/>
+                        <Message own={true}/>
                         <Message/>
                         <Message/>
                     </div>
