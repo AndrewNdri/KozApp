@@ -4,7 +4,7 @@ import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import { AuthContext } from "../../context/AuthContext";
-import { useContext, useState, useEffect, useInsertionEffect } from "react";
+import { useContext, useState, useEffect, useRef} from "react";
 import axios from "axios"; 
 
 export default function Messenger() {
@@ -13,6 +13,7 @@ export default function Messenger() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const {user} = useContext(AuthContext);
+    const scrollRef = useRef();
 
     useEffect(() => {
       const getConversations = async ()=>{
@@ -49,10 +50,15 @@ export default function Messenger() {
         try{
             const res = await axios.post("/messages", message);
             setMessages([...messages, res.data]);
+            setNewMessage("");
         }catch(err){
             console.log(err);
         }
     };
+
+    useEffect(()=>{
+        scrollRef.current?.scrollIntoView({behavior: "smooth"})
+    }, [messages])
     
   return (
     <>
@@ -75,7 +81,10 @@ export default function Messenger() {
                         <>
                             <div className="chatBoxTop">
                                 {messages.map(m=>(
-                                    <Message message={m} own={m.sender === user._id}/>
+                                    <div ref={scrollRef}>
+                                        <Message message={m} own={m.sender === user._id}/>
+                                    </div>
+                                    
                                 ))}
                             </div>
                             <div className="chatBoxBottom">
