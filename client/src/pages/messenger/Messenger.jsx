@@ -48,7 +48,7 @@ export default function Messenger() {
 
         try{
             const res = await axios.post("/messages", message);
-            setMessages([...message, res.data]);
+            setMessages([...messages, res.data]);
         }catch(err){
             console.log(err);
         }
