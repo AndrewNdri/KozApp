@@ -23,6 +23,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-right: 10px;
+    position: relative;
 }
 
 .chatBoxTop{
@@ -61,4 +62,12 @@
     cursor: pointer;
     background-color: #5c0514;
     color: rgb(252, 252, 243);
+}
+
+.noConversationText{
+    position: absolute;
+    top: 10%;
+    font-size: 50px;
+    color: rgb(235, 223, 223);
+    cursor: default;
 }

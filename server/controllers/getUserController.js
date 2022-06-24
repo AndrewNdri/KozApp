@@ -8,6 +8,7 @@ module.exports.getUserController = async (req, res) =>{
         const {password, updatedAt,...other} = user._doc;
         res.status(200).json(other);
     }catch(err){
+        console.log(err)
         res.status(500).send(err);
     }
 };

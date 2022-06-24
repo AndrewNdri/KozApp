@@ -9,6 +9,7 @@ export default function Register() {
     const password = useRef();
     const passwordAgain = useRef();
     const navigate = useNavigate();
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     const handleClick = async (e)=>{
         e.preventDefault();
@@ -18,7 +19,8 @@ export default function Register() {
             const user = {
                 username: username.current.value,
                 email: email.current.value,
-                password: password.current.value
+                password: password.current.value,
+                profilePicture: `${PF}person/avatar.jpeg`
             }
             try{
                 await axios.post("/auth/register", user);
