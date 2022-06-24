@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
+const {checkUser, requireAuth} = require('./utils/authVerification');
 
 var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -36,7 +37,11 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true})
 })
 .catch(err => console.log(err));
 
-
+//jwt
+app.get('*', checkUser);
+app.get('/jwtid', requireAuth, (req, res)=>{
+  res.status(200).send(res.locals.user._id)
+});
 
 app.use('/', indexRouter);
 //middlewares
