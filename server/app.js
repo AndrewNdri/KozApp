@@ -14,9 +14,17 @@ const authRouter = require('./routes/auth');
 const postsRoute = require('./routes/posts');
 const conversationsRoute = require('./routes/conversations');
 const messagesRoute = require('./routes/messages');
+//const cors = require('cors');
 
 var app = express();
 
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+//app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -26,6 +34,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 //app.use(express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
@@ -39,7 +48,7 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true})
 
 //jwt
 app.get('*', checkUser);
-app.get('/jwtid', requireAuth, (req, res)=>{
+app.get('/api/jwtid', requireAuth, (req, res)=>{
   res.status(200).send(res.locals.user._id)
 });
 

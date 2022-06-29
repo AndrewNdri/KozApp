@@ -5,7 +5,8 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import {format} from "timeago.js";
 import {Link} from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import {useSelector} from "react-redux";
+//import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({post}) {
   // console.log(post);
@@ -13,7 +14,7 @@ export default function Post({post}) {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const {user: currentUser} = useContext(AuthContext);
+  const currentUser = useSelector((state) => state.userReducer);
   
   useEffect(()=>{
     setIsLiked(post.likes.includes(currentUser._id));

@@ -5,14 +5,17 @@ import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import {Add, Remove} from '@mui/icons-material';
-import { AuthContext } from "../../context/AuthContext";
+import {useSelector, useDispatch} from "react-redux";
+import { Follow, Unfollow } from "../../context/AuthActions";
+//import { AuthContext } from "../../context/AuthContext";
 
 export default function Rightbar({user}) {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const dispatch = useDispatch();
   const [friends, setFriends] = useState([]);
-  const {user: currentUser, dispatch} = useContext(AuthContext);
-  const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id));
+  const currentUser = useSelector((state) => state.userReducer);
+  const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
 
   
   useEffect(() =>{
@@ -30,11 +33,12 @@ export default function Rightbar({user}) {
   const handleClick = async ()=>{
     try{
       if(followed){
-        await axios.patch("/users/"+user._id+"/unfollow", {userId: currentUser._id});
-        dispatch({type: "UNFOLLOW", payload: user._id});
+        await dispatch(Unfollow(currentUser._id, user._id));
+        //dispatch({type: "UNFOLLOW", payload: user._id});
       }else{
-        await axios.patch("/users/"+user._id+"/follow", {userId: currentUser._id});
-        dispatch({type: "FOLLOW", payload: user._id});
+        await dispatch(Follow(currentUser._id, user._id));
+        //await axios.patch("/users/"+user._id+"/follow", {userId: currentUser._id});
+        //dispatch({type: "FOLLOW", payload: user._id});
       }
     }catch(err){
       console.log(err);
@@ -54,7 +58,7 @@ export default function Rightbar({user}) {
         <img src="" alt="" className="rightbarAd" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendsList">
-          {Users.map(u=> <Online key={u.id} user={u}/>)}
+          {Users.map(u=> <Online key={u._id} user={u}/>)}
         </ul>
       </>
     );

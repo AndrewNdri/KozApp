@@ -3,8 +3,9 @@ import Topbar from "../../components/topbar/Topbar";
 import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext, useState, useEffect, useRef} from "react";
+//import { AuthContext } from "../../context/AuthContext";
+import { useState, useEffect, useRef} from "react";
+import {useSelector} from "react-redux";
 import axios from "axios"; 
 
 export default function Messenger() {
@@ -12,7 +13,7 @@ export default function Messenger() {
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const {user} = useContext(AuthContext);
+    const user = useSelector((state) => state.userReducer);
     const scrollRef = useRef();
 
     useEffect(() => {

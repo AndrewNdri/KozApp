@@ -1,11 +1,13 @@
 import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
-import {Link} from "react-router-dom"
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+
+//import { useContext } from "react";
+//import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
-    const {user} = useContext(AuthContext);
+    const user = useSelector((state) => state.userReducer);
     console.log(user);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     return (

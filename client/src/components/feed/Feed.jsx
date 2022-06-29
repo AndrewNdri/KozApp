@@ -4,11 +4,12 @@ import "./feed.css";
 import { useState, useEffect, useContext } from "react";
 //import {Posts} from "../../dummyData";
 import axios from "axios";
-import { AuthContext } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 
 export default function Feed({username}) {
   const [posts, setPosts] = useState([]);
-  const {user} = useContext(AuthContext);
+  const user = useSelector((state) => state.userReducer);
+  console.log(username)
 
   useEffect(()=>{
     const fetchPosts = async()=>{
