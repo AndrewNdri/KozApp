@@ -12,7 +12,7 @@ export const getUser = (uid)=>{
             .catch((err)=> console.log(err))
     }
 }
-// export = (userCredentials)=>({
+// export const loginSt = (userCredentials)=>({
 //     type: "LOGIN_START",
 // });
 
