@@ -14,7 +14,7 @@ module.exports.loginController = async(req, res) =>{
     try{
         //Data validation
         const {error} = loginValidation(req.body);
-        if(error) return res.status(400).send(error.details[0].message);
+        if(error) return res.status(400).json(error.details[0].message);
 
         //checking if the email exists
         const user = await User.findOne({email: req.body.email});

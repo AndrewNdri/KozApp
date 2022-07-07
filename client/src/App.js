@@ -48,10 +48,10 @@ function App() {
       <Router>
             <Routes>
               <Route exact path="/" element={uid ? <Home/> : <Login/>}/>
-              <Route  path="/login" element={uid ? <Navigate to="/"/> : <Login/>}/>
-              <Route  path="/profile/:username" element={<Profile/>}/>
-              <Route  path="/register" element={uid ? <Navigate to="/"/> : <Register/>}/>
-              <Route  path="/messenger" element={uid ? <Messenger/> : <Login/>}/>
+              <Route exact path="/login" element={uid ? <Navigate to="/"/> : <Login/>}/>
+              <Route exact path="/profile/:username" element={<Profile/>}/>
+              <Route exact path="/register" element={uid ? <Navigate to="/"/> : <Register/>}/>
+              <Route exact path="/messenger" element={uid ? <Messenger/> : <Login/>}/>
             </Routes>
       </Router>
 
