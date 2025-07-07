@@ -1,0 +1,9 @@
+.feed{
+    flex: 5.5;
+    height: calc(100% - 50px);
+    background-color: rgb(245, 240, 228);
+}
+
+.feedWrapper{
+    padding: 20px;
+}
